@@ -1103,12 +1103,29 @@
         font-size: 11.5px;
       }
       .fs-check {
+        position: relative;
         display: flex;
         gap: 10px;
         align-items: flex-start;
         margin: 8px 0;
         font-size: 13px;
         color: rgba(31, 35, 41, 0.72);
+        padding: 6px 8px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        user-select: none;
+      }
+      .fs-check:hover {
+        background: rgba(31, 35, 41, 0.03);
+        border-color: rgba(31, 35, 41, 0.08);
+      }
+      .fs-check-input {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        pointer-events: none;
       }
       .fs-box {
         width: 16px;
@@ -1118,6 +1135,20 @@
         background: #ffffff;
         margin-top: 2px;
         flex: none;
+        display: inline-grid;
+        place-items: center;
+        color: transparent;
+      }
+      .fs-check-input:checked + .fs-box {
+        border-color: rgba(46, 108, 255, 0.38);
+        background: rgba(46, 108, 255, 0.10);
+        color: rgba(46, 108, 255, 1);
+      }
+      .fs-check-input:checked + .fs-box::after {
+        content: "✓";
+        font-size: 12px;
+        line-height: 1;
+        margin-top: -1px;
       }
       .fs-right {
         border-left: 1px solid rgba(31, 35, 41, 0.10);
@@ -1552,7 +1583,7 @@
         <div class="fs-top">
           <div class="fs-brand">
             <div class="fs-logo" aria-hidden="true"></div>
-            <div class="fs-docname">文档 / 团队空间 / 入职与协作 / 飞书文档使用指南</div>
+            <div class="fs-docname" id="fsDocname">文档 / 团队空间 / 入职与协作 / 飞书文档使用指南</div>
           </div>
           <div class="fs-actions">
             <span class="fs-pill">只读</span>
@@ -1565,52 +1596,54 @@
         <div class="fs-body">
           <aside class="fs-left">
             <h5>最近打开</h5>
-            <div class="fs-item"><span class="fs-ico" aria-hidden="true"></span> 周会纪要（模板）</div>
-            <div class="fs-item"><span class="fs-ico" aria-hidden="true"></span> OKR 对齐 · Q2</div>
-            <div class="fs-item active"><span class="fs-ico" aria-hidden="true"></span> 飞书文档使用指南</div>
-            <div class="fs-item"><span class="fs-ico" aria-hidden="true"></span> 产品需求评审清单</div>
+            <button class="fs-item" type="button" data-fs-doc="weekly"><span class="fs-ico" aria-hidden="true"></span> 周会纪要（模板）</button>
+            <button class="fs-item" type="button" data-fs-doc="okr"><span class="fs-ico" aria-hidden="true"></span> OKR 对齐 · Q2</button>
+            <button class="fs-item active" type="button" data-fs-doc="guide"><span class="fs-ico" aria-hidden="true"></span> 飞书文档使用指南</button>
+            <button class="fs-item" type="button" data-fs-doc="prd"><span class="fs-ico" aria-hidden="true"></span> 产品需求评审清单</button>
             <h5>空间</h5>
-            <div class="fs-item"><span class="fs-ico" aria-hidden="true"></span> 团队空间</div>
-            <div class="fs-item"><span class="fs-ico" aria-hidden="true"></span> 项目资料</div>
+            <button class="fs-item" type="button" data-fs-folder="team"><span class="fs-ico" aria-hidden="true"></span> 团队空间</button>
+            <button class="fs-item" type="button" data-fs-folder="proj"><span class="fs-ico" aria-hidden="true"></span> 项目资料</button>
           </aside>
-          <main class="fs-main">
-            <div class="fs-breadcrumb">团队空间 / 入职与协作 / 文档</div>
-            <h1 class="fs-title">飞书文档使用指南</h1>
-            <div class="fs-meta">最后编辑：刚刚 · 权限：团队可见 · 状态：草稿</div>
+          <main class="fs-main" id="fsMain">
+            <div class="fs-breadcrumb" id="fsBreadcrumb">团队空间 / 入职与协作 / 文档</div>
+            <h1 class="fs-title" id="fsTitle">飞书文档使用指南</h1>
+            <div class="fs-meta" id="fsMeta">最后编辑：刚刚 · 权限：团队可见 · 状态：草稿</div>
 
             <div class="fs-callout">
               <b>提示</b>
               <div class="fs-p">这是一个只读指南页面。按 <span class="kbd">Shift</span> + <span class="kbd">Esc</span> 可快速返回阅读。</div>
             </div>
 
-            <h2 class="fs-h2" id="fs-sec-1">1. 快速开始</h2>
-            <p class="fs-p">- 用标题（H1/H2/H3）组织结构；用清单追踪事项；用表格记录对齐信息。</p>
-            <div class="fs-check"><span class="fs-box" aria-hidden="true"></span> 创建文档并设置标题</div>
-            <div class="fs-check"><span class="fs-box" aria-hidden="true"></span> 插入目录并检查层级</div>
-            <div class="fs-check"><span class="fs-box" aria-hidden="true"></span> 共享给相关同事（只读/可评论）</div>
+            <div id="fsDocBody">
+              <h2 class="fs-h2" id="fs-sec-1">1. 快速开始</h2>
+              <p class="fs-p">- 用标题（H1/H2/H3）组织结构；用清单追踪事项；用表格记录对齐信息。</p>
+              <label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 创建文档并设置标题</label>
+              <label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 插入目录并检查层级</label>
+              <label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 共享给相关同事（只读/可评论）</label>
 
-            <h2 class="fs-h2" id="fs-sec-2">2. 常用快捷操作</h2>
-            <table class="fs-table" aria-label="快捷操作">
-              <thead>
-                <tr><th>场景</th><th>推荐做法</th><th>备注</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>记录会议</td><td>使用模板 + 清单</td><td>会后 10 分钟内同步</td></tr>
-                <tr><td>需求对齐</td><td>表格记录范围/风险/Owner</td><td>避免口头信息丢失</td></tr>
-                <tr><td>知识沉淀</td><td>章节化 + 目录 + 链接</td><td>便于检索</td></tr>
-              </tbody>
-            </table>
+              <h2 class="fs-h2" id="fs-sec-2">2. 常用快捷操作</h2>
+              <table class="fs-table" aria-label="快捷操作">
+                <thead>
+                  <tr><th>场景</th><th>推荐做法</th><th>备注</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>记录会议</td><td>使用模板 + 清单</td><td>会后 10 分钟内同步</td></tr>
+                  <tr><td>需求对齐</td><td>表格记录范围/风险/Owner</td><td>避免口头信息丢失</td></tr>
+                  <tr><td>知识沉淀</td><td>章节化 + 目录 + 链接</td><td>便于检索</td></tr>
+                </tbody>
+              </table>
 
-            <h2 class="fs-h2" id="fs-sec-3">3. 协作规范</h2>
-            <p class="fs-p">建议用「评论」提出问题，用「@」指定负责人；修改较大时在顶部摘要区写清楚变更点。</p>
-            <div class="fs-callout">
-              <b>建议</b>
-              <div class="fs-p">文档标题用「主题 + 日期」命名；重要页面固定到空间置顶。</div>
+              <h2 class="fs-h2" id="fs-sec-3">3. 协作规范</h2>
+              <p class="fs-p">建议用「评论」提出问题，用「@」指定负责人；修改较大时在顶部摘要区写清楚变更点。</p>
+              <div class="fs-callout">
+                <b>建议</b>
+                <div class="fs-p">文档标题用「主题 + 日期」命名；重要页面固定到空间置顶。</div>
+              </div>
             </div>
           </main>
           <aside class="fs-right">
             <h5>大纲</h5>
-            <div class="fs-outline">
+            <div class="fs-outline" id="fsOutline">
               <a href="#fs-sec-1">快速开始</a>
               <a href="#fs-sec-2">常用快捷操作</a>
               <a href="#fs-sec-3">协作规范</a>
@@ -10340,6 +10373,224 @@
         setFavicon(svgFavicon('#2e6cff', '#ffffff', 'D'));
       }
 
+      // --- Feishu stealth page: interactive doc shell (tabs, outline, checkboxes) ---
+      const feishuEls = {
+        docname: document.getElementById('fsDocname'),
+        breadcrumb: document.getElementById('fsBreadcrumb'),
+        title: document.getElementById('fsTitle'),
+        meta: document.getElementById('fsMeta'),
+        outline: document.getElementById('fsOutline'),
+        main: document.getElementById('fsMain'),
+        body: document.getElementById('fsDocBody'),
+      };
+      const feishuDocs = {
+        guide: {
+          docname: '文档 / 团队空间 / 入职与协作 / 飞书文档使用指南',
+          breadcrumb: '团队空间 / 入职与协作 / 文档',
+          title: '飞书文档使用指南',
+          meta: '最后编辑：刚刚 · 权限：团队可见 · 状态：草稿',
+          sections: [
+            {
+              id: 'fs-sec-1',
+              title: '1. 快速开始',
+              html:
+                `<p class="fs-p">- 用标题（H1/H2/H3）组织结构；用清单追踪事项；用表格记录对齐信息。</p>` +
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 创建文档并设置标题</label>` +
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 插入目录并检查层级</label>` +
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 共享给相关同事（只读/可评论）</label>`,
+            },
+            {
+              id: 'fs-sec-2',
+              title: '2. 常用快捷操作',
+              html:
+                `<table class="fs-table" aria-label="快捷操作">` +
+                `<thead><tr><th>场景</th><th>推荐做法</th><th>备注</th></tr></thead>` +
+                `<tbody>` +
+                `<tr><td>记录会议</td><td>使用模板 + 清单</td><td>会后 10 分钟内同步</td></tr>` +
+                `<tr><td>需求对齐</td><td>表格记录范围/风险/Owner</td><td>避免口头信息丢失</td></tr>` +
+                `<tr><td>知识沉淀</td><td>章节化 + 目录 + 链接</td><td>便于检索</td></tr>` +
+                `</tbody></table>`,
+            },
+            {
+              id: 'fs-sec-3',
+              title: '3. 协作规范',
+              html:
+                `<p class="fs-p">建议用「评论」提出问题，用「@」指定负责人；修改较大时在顶部摘要区写清楚变更点。</p>` +
+                `<div class="fs-callout"><b>建议</b><div class="fs-p">文档标题用「主题 + 日期」命名；重要页面固定到空间置顶。</div></div>`,
+            },
+          ],
+        },
+        weekly: {
+          docname: '文档 / 团队空间 / 周会纪要（模板）',
+          breadcrumb: '团队空间 / 会议纪要 / 周会',
+          title: '周会纪要（模板）',
+          meta: '最后编辑：今天 10:28 · 权限：团队可见 · 状态：已发布',
+          sections: [
+            {
+              id: 'fs-sec-1',
+              title: '1. 会议摘要',
+              html:
+                `<div class="fs-callout"><b>结论</b><div class="fs-p">本周重点：上线复盘、下周排期、风险与依赖对齐。</div></div>` +
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 结论同步到群公告</label>` +
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> Owner 明确并给出截止时间</label>`,
+            },
+            {
+              id: 'fs-sec-2',
+              title: '2. 待办清单',
+              html:
+                `<table class="fs-table" aria-label="待办">` +
+                `<thead><tr><th>事项</th><th>Owner</th><th>DDL</th></tr></thead>` +
+                `<tbody>` +
+                `<tr><td>上线复盘文档</td><td>产品</td><td>周三</td></tr>` +
+                `<tr><td>埋点补齐</td><td>研发</td><td>周四</td></tr>` +
+                `<tr><td>回归测试</td><td>QA</td><td>周五</td></tr>` +
+                `</tbody></table>`,
+            },
+            {
+              id: 'fs-sec-3',
+              title: '3. 风险与依赖',
+              html: `<p class="fs-p">- 依赖外部接口变更；- 关键人员请假；- 灰度策略与回滚预案。</p>`,
+            },
+          ],
+        },
+        okr: {
+          docname: '文档 / 团队空间 / OKR 对齐 · Q2',
+          breadcrumb: '团队空间 / OKR / 2026 Q2',
+          title: 'OKR 对齐 · Q2',
+          meta: '最后编辑：昨天 21:02 · 权限：团队可见 · 状态：草稿',
+          sections: [
+            {
+              id: 'fs-sec-1',
+              title: '1. Objective',
+              html: `<p class="fs-p"><b>O1:</b> 提升核心功能留存与阅读完成率。</p>`,
+            },
+            {
+              id: 'fs-sec-2',
+              title: '2. Key Results',
+              html:
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> KR1：阅读完成率 +15%</label>` +
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> KR2：次日留存 +8%</label>` +
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> KR3：关键路径耗时 -20%</label>`,
+            },
+            {
+              id: 'fs-sec-3',
+              title: '3. Owner & 节奏',
+              html: `<p class="fs-p">- 每周复盘一次；- 里程碑按双周节奏推进；- 风险及时升级。</p>`,
+            },
+          ],
+        },
+        prd: {
+          docname: '文档 / 团队空间 / 产品需求评审清单',
+          breadcrumb: '团队空间 / 产品 / 评审',
+          title: '产品需求评审清单',
+          meta: '最后编辑：上周 · 权限：团队可见 · 状态：已发布',
+          sections: [
+            {
+              id: 'fs-sec-1',
+              title: '1. 需求定义',
+              html:
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 目标用户/场景清晰</label>` +
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 价值与成功指标明确</label>`,
+            },
+            {
+              id: 'fs-sec-2',
+              title: '2. 方案与边界',
+              html:
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 交互稿/流程图齐全</label>` +
+                `<label class="fs-check"><input class="fs-check-input" type="checkbox" /> <span class="fs-box" aria-hidden="true"></span> 边界/异常/降级覆盖</label>`,
+            },
+            {
+              id: 'fs-sec-3',
+              title: '3. 风险与发布',
+              html: `<p class="fs-p">- 依赖与风险列表；- 灰度与回滚；- 监控与验收标准。</p>`,
+            },
+          ],
+        },
+      };
+
+      let feishuActiveDocId = 'guide';
+      function renderFeishuDoc(docId) {
+        const d = feishuDocs[docId] || feishuDocs.guide;
+        feishuActiveDocId = docId;
+        if (feishuEls.docname) feishuEls.docname.textContent = d.docname;
+        if (feishuEls.breadcrumb) feishuEls.breadcrumb.textContent = d.breadcrumb;
+        if (feishuEls.title) feishuEls.title.textContent = d.title;
+        if (feishuEls.meta) feishuEls.meta.textContent = d.meta;
+
+        if (feishuEls.body) {
+          const bodyHtml = d.sections
+            .map(sec => `<h2 class="fs-h2" id="${sec.id}">${escapeHtml(sec.title)}</h2>${sec.html}`)
+            .join('\n');
+          feishuEls.body.innerHTML = bodyHtml;
+        }
+
+        if (feishuEls.outline) {
+          feishuEls.outline.innerHTML = d.sections
+            .map(sec => `<a href="#${sec.id}" data-fs-anchor="${sec.id}">${escapeHtml(sec.title.replace(/^\d+\.\s*/, ''))}</a>`)
+            .join('\n');
+        }
+      }
+
+      function setFeishuActiveSidebar(docId) {
+        const items = Array.from(stealthCover.querySelectorAll('[data-fs-doc]'));
+        for (const it of items) {
+          it.classList.toggle('active', it.getAttribute('data-fs-doc') === docId);
+        }
+      }
+
+      function bindFeishuInteractionsOnce() {
+        if (!stealthCover) return;
+        if (stealthCover.__feishuBound) return;
+        stealthCover.__feishuBound = true;
+
+        // Sidebar doc switching
+        stealthCover.addEventListener('click', (e) => {
+          const docBtn = e.target && e.target.closest ? e.target.closest('[data-fs-doc]') : null;
+          if (docBtn) {
+            const id = docBtn.getAttribute('data-fs-doc');
+            setFeishuActiveSidebar(id);
+            renderFeishuDoc(id);
+            return;
+          }
+        });
+
+        // Outline smooth scroll inside the main pane
+        stealthCover.addEventListener('click', (e) => {
+          const a = e.target && e.target.closest ? e.target.closest('#fsOutline a') : null;
+          if (!a) return;
+          const id = a.getAttribute('data-fs-anchor') || (a.getAttribute('href') || '').slice(1);
+          const sec = id ? document.getElementById(id) : null;
+          if (sec && feishuEls.main) {
+            e.preventDefault();
+            sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+
+        // Scroll spy: highlight current section in outline
+        let spyTick = 0;
+        function refreshSpy() {
+          if (!state.stealth) return;
+          if (!feishuEls.main || !feishuEls.outline) return;
+          const links = Array.from(feishuEls.outline.querySelectorAll('a[data-fs-anchor]'));
+          const ids = links.map(x => x.getAttribute('data-fs-anchor')).filter(Boolean);
+          const tops = ids
+            .map(id => ({ id, el: document.getElementById(id) }))
+            .filter(x => x.el)
+            .map(x => ({ id: x.id, top: x.el.getBoundingClientRect().top }));
+          const current = tops
+            .filter(x => x.top < 140)
+            .sort((a, b) => b.top - a.top)[0];
+          const activeId = current ? current.id : (ids[0] || '');
+          for (const l of links) l.classList.toggle('active', l.getAttribute('data-fs-anchor') === activeId);
+          spyTick = 0;
+        }
+        window.addEventListener('scroll', () => {
+          if (!state.stealth) return;
+          if (spyTick) return;
+          spyTick = window.requestAnimationFrame(refreshSpy);
+        }, { passive: true });
+      }
+
       function loadPrefs() {
         try {
           const raw = localStorage.getItem(prefsKey);
@@ -10376,6 +10627,12 @@
         document.getElementById('chipStealth').setAttribute('aria-pressed', state.stealth ? 'true' : 'false');
 
         enforceFeishuTab();
+        // Ensure the Feishu cover is interactive and populated.
+        if (state.stealth) {
+          try { bindFeishuInteractionsOnce(); } catch (_) {}
+          try { setFeishuActiveSidebar(feishuActiveDocId); } catch (_) {}
+          try { renderFeishuDoc(feishuActiveDocId); } catch (_) {}
+        }
       }
 
       function togglePanel() {
@@ -10401,6 +10658,10 @@
       enforceFeishuTab();
       document.addEventListener('visibilitychange', enforceFeishuTab);
       window.addEventListener('focus', enforceFeishuTab);
+      // Init Feishu doc cover content once on load.
+      try { bindFeishuInteractionsOnce(); } catch (_) {}
+      try { setFeishuActiveSidebar(feishuActiveDocId); } catch (_) {}
+      try { renderFeishuDoc(feishuActiveDocId); } catch (_) {}
       document.getElementById('chipEye').addEventListener('click', () => {
         state.eye = !state.eye;
         savePrefs();
