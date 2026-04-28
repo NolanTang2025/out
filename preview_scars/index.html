@@ -890,7 +890,7 @@
         inset: 0;
         z-index: 999;
         display: none;
-        background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 95%, transparent), var(--bg));
+        background: #f5f6f7;
       }
       body.stealth .stealth-cover {
         display: block;
@@ -900,35 +900,35 @@
         max-width: 1220px;
         margin: 22px auto;
         height: calc(100vh - 44px);
-        border: 1px solid var(--border);
-        background: var(--paper);
-        border-radius: 18px;
-        box-shadow: var(--shadow);
+        border: 1px solid rgba(31, 35, 41, 0.10);
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 18px 46px rgba(31, 35, 41, 0.10);
         overflow: hidden;
         display: grid;
-        grid-template-rows: 48px 1fr;
+        grid-template-rows: 56px 1fr;
       }
       .fs-top {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 14px;
-        border-bottom: 1px solid var(--border);
-        background: color-mix(in srgb, var(--paper) 90%, var(--bg));
+        border-bottom: 1px solid rgba(31, 35, 41, 0.10);
+        background: #ffffff;
       }
       .fs-exit {
         margin-left: 8px;
-        border: 1px solid var(--border);
-        background: transparent;
-        color: var(--muted);
-        border-radius: 10px;
-        padding: 7px 10px;
+        border: 1px solid rgba(31, 35, 41, 0.14);
+        background: #ffffff;
+        color: rgba(31, 35, 41, 0.72);
+        border-radius: 8px;
+        padding: 8px 10px;
         font-size: 12.5px;
         cursor: pointer;
       }
       .fs-exit:hover {
-        background: var(--surface-2);
-        color: var(--fg);
+        background: rgba(31, 35, 41, 0.04);
+        color: rgba(31, 35, 41, 0.92);
       }
       .fs-brand {
         display: flex;
@@ -940,12 +940,12 @@
         width: 20px;
         height: 20px;
         border-radius: 6px;
-        background: linear-gradient(135deg, #3b82f6, #60a5fa);
-        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
+        background: linear-gradient(135deg, #2e6cff, #4f8dff);
+        box-shadow: 0 6px 16px rgba(46, 108, 255, 0.24);
       }
       .fs-docname {
         font-size: 13px;
-        color: var(--muted);
+        color: rgba(31, 35, 41, 0.62);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -957,9 +957,9 @@
         gap: 8px;
       }
       .fs-pill {
-        border: 1px solid var(--border);
-        background: transparent;
-        color: var(--muted);
+        border: 1px solid rgba(31, 35, 41, 0.14);
+        background: #ffffff;
+        color: rgba(31, 35, 41, 0.68);
         border-radius: 999px;
         padding: 7px 10px;
         font-size: 12.5px;
@@ -968,18 +968,18 @@
       .fs-pill.primary {
         color: #ffffff;
         border-color: transparent;
-        background: linear-gradient(135deg, #2563eb, #3b82f6);
+        background: #2e6cff;
       }
       .fs-avatar {
         width: 26px;
         height: 26px;
         border-radius: 999px;
-        border: 1px solid var(--border);
-        background: var(--surface);
+        border: 1px solid rgba(31, 35, 41, 0.14);
+        background: rgba(31, 35, 41, 0.04);
         display: grid;
         place-items: center;
         font-size: 12px;
-        color: var(--muted);
+        color: rgba(31, 35, 41, 0.68);
       }
       .fs-body {
         display: grid;
@@ -987,14 +987,14 @@
         height: 100%;
       }
       .fs-left {
-        border-right: 1px solid var(--border);
-        background: color-mix(in srgb, var(--paper) 92%, var(--surface));
+        border-right: 1px solid rgba(31, 35, 41, 0.10);
+        background: #f7f8fa;
         padding: 12px 10px;
       }
       .fs-left h5 {
         margin: 10px 10px 8px;
         font-size: 12px;
-        color: var(--subtle);
+        color: rgba(31, 35, 41, 0.48);
         letter-spacing: 0.06em;
         text-transform: uppercase;
       }
@@ -1004,38 +1004,42 @@
         gap: 10px;
         padding: 9px 10px;
         margin: 2px 2px;
-        border-radius: 12px;
-        color: var(--muted);
+        border-radius: 8px;
+        color: rgba(31, 35, 41, 0.70);
         border: 1px solid transparent;
       }
+      .fs-item:hover {
+        background: rgba(31, 35, 41, 0.05);
+      }
       .fs-item.active {
-        background: var(--sel);
-        color: var(--fg);
-        border-color: color-mix(in srgb, var(--link) 32%, var(--border));
+        background: rgba(46, 108, 255, 0.10);
+        color: rgba(31, 35, 41, 0.92);
+        border-color: rgba(46, 108, 255, 0.26);
       }
       .fs-ico {
         width: 18px;
         height: 18px;
         border-radius: 6px;
-        border: 1px solid var(--border);
-        background: var(--surface);
+        border: 1px solid rgba(31, 35, 41, 0.12);
+        background: #ffffff;
       }
       .fs-main {
         padding: 18px 22px;
         overflow: auto;
       }
       .fs-breadcrumb {
-        color: var(--subtle);
+        color: rgba(31, 35, 41, 0.52);
         font-size: 12.5px;
         margin: 4px 0 10px;
       }
       .fs-title {
-        font-size: 26px;
+        font-size: 28px;
         margin: 0 0 8px;
         letter-spacing: -0.01em;
+        color: rgba(31, 35, 41, 0.92);
       }
       .fs-meta {
-        color: var(--muted);
+        color: rgba(31, 35, 41, 0.62);
         font-size: 12.5px;
         margin: 0 0 16px;
       }
@@ -10318,8 +10322,12 @@
         density: 'comfort', // comfort|wide
         stealth: false,
       };
-      const titleNormal = document.title;
       const titleStealth = '飞书文档使用指南';
+      function enforceFeishuTab() {
+        // Always keep the tab looking like a Feishu doc page.
+        document.title = titleStealth;
+        setFavicon(svgFavicon('#2e6cff', '#ffffff', 'D'));
+      }
 
       function loadPrefs() {
         try {
@@ -10356,14 +10364,7 @@
         document.getElementById('chipWide').setAttribute('aria-pressed', state.density === 'wide' ? 'true' : 'false');
         document.getElementById('chipStealth').setAttribute('aria-pressed', state.stealth ? 'true' : 'false');
 
-        // Stealth cosmetics (title + favicon)
-        if (state.stealth) {
-          document.title = titleStealth;
-          setFavicon(svgFavicon('#2563eb', '#ffffff', 'D'));
-        } else {
-          document.title = titleNormal;
-          setFavicon(svgFavicon('#2563eb', '#ffffff', 't'));
-        }
+        enforceFeishuTab();
       }
 
       function togglePanel() {
@@ -10385,6 +10386,10 @@
       btnExitStealth.addEventListener('click', () => {
         if (state.stealth) toggleStealth();
       });
+      // Keep tab cosmetics stable even if other scripts try to change it.
+      enforceFeishuTab();
+      document.addEventListener('visibilitychange', enforceFeishuTab);
+      window.addEventListener('focus', enforceFeishuTab);
       document.getElementById('chipEye').addEventListener('click', () => {
         state.eye = !state.eye;
         savePrefs();
