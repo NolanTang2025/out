@@ -631,6 +631,159 @@
         background: color-mix(in srgb, var(--paper) 90%, var(--surface));
         color: var(--fg);
       }
+
+      /* ============================================================
+         Kindle-like e-ink theme (calm, matte, grayscale, bookish)
+         ============================================================ */
+      body.kindle {
+        --bg: #f3f0e7;
+        --paper: #fbf8ef;
+        --paper-solid: #fbf8ef;
+        --fg: rgba(18, 18, 18, 0.92);
+        --muted: rgba(18, 18, 18, 0.62);
+        --subtle: rgba(18, 18, 18, 0.44);
+        --border: rgba(18, 18, 18, 0.14);
+        --border-2: rgba(18, 18, 18, 0.18);
+        --surface: rgba(18, 18, 18, 0.03);
+        --surface-2: rgba(18, 18, 18, 0.045);
+        --link: rgba(18, 18, 18, 0.86);
+        --accent: rgba(18, 18, 18, 0.86);
+        --accent-2: rgba(18, 18, 18, 0.76);
+        --accent-3: rgba(18, 18, 18, 0.70);
+        --sel: rgba(18, 18, 18, 0.08);
+        --shadow: none;
+        --shadow-sm: none;
+        --focus: rgba(18, 18, 18, 0.10);
+        --mesh: none;
+        --grid: none;
+        --maxw: 720px;
+      }
+      body.kindle::after { display: none; }
+
+      body.kindle .topbar {
+        backdrop-filter: none;
+        background: color-mix(in srgb, var(--bg) 88%, white);
+        border-bottom: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+        box-shadow: none;
+      }
+      body.kindle .logo {
+        background: transparent;
+        border: 1px solid var(--border);
+        box-shadow: none;
+      }
+      body.kindle .logo::after { display: none; }
+      body.kindle .brand-title {
+        font-family: var(--font-display);
+        font-size: 14px;
+        letter-spacing: 0.03em;
+        color: var(--fg);
+      }
+
+      body.kindle .icon-btn,
+      body.kindle .btn,
+      body.kindle .chip {
+        border-radius: 999px;
+        border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+        background: transparent;
+        color: var(--muted);
+      }
+      body.kindle .icon-btn:hover,
+      body.kindle .btn:hover,
+      body.kindle .chip:hover {
+        background: color-mix(in srgb, var(--paper) 92%, var(--surface));
+        color: var(--fg);
+      }
+
+      body.kindle .toc {
+        background: color-mix(in srgb, var(--paper) 96%, var(--bg));
+        border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+        box-shadow: none;
+      }
+      body.kindle .toc h2 {
+        font-family: var(--font-display);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        color: var(--subtle);
+      }
+      body.kindle .toc a {
+        border-radius: 10px;
+      }
+      body.kindle .toc a.active {
+        background: rgba(18,18,18,0.06);
+      }
+      body.kindle .toc a.active::before { display: none; }
+
+      body.kindle .search {
+        background: transparent;
+        border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+        border-radius: 999px;
+      }
+      body.kindle .search:focus {
+        border-color: color-mix(in srgb, var(--border-2) 85%, transparent);
+        box-shadow: 0 0 0 3px rgba(18,18,18,0.06);
+      }
+
+      body.kindle a { color: var(--link); text-decoration: none; }
+      body.kindle a:hover { text-decoration: underline; }
+
+      body.kindle .doc {
+        background: var(--paper-solid);
+        border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+        border-radius: 12px;
+        box-shadow: none;
+      }
+      body.kindle .doc::before,
+      body.kindle .doc::after { display: none; }
+      body.kindle .doc-inner { max-width: var(--maxw); }
+
+      body.kindle .title {
+        font-family: var(--font-display);
+        font-weight: 600;
+        color: var(--fg);
+      }
+      body.kindle .meta {
+        font-family: var(--font-body);
+        color: var(--muted);
+      }
+      body.kindle .h2 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        color: var(--fg);
+      }
+      body.kindle p {
+        font-family: var(--font-display);
+        font-size: 18px;
+        line-height: 2.0;
+        letter-spacing: 0.01em;
+        color: var(--fg);
+      }
+      body.kindle .block p {
+        text-indent: 2em;
+        margin: 0 0 12px 0;
+        text-align: justify;
+        text-justify: inter-ideograph;
+      }
+      body.kindle mark {
+        background: rgba(18,18,18,0.10);
+        border-radius: 4px;
+        padding: 0 2px;
+      }
+
+      body.kindle .banner,
+      body.kindle .panel,
+      body.kindle .fab {
+        box-shadow: none;
+      }
+      body.kindle .fab {
+        background: color-mix(in srgb, var(--paper) 92%, var(--surface));
+        border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+      }
+
+      @media (max-width: 900px) {
+        body.kindle .doc { padding: 26px 18px 42px; }
+        body.kindle p { font-size: 17px; line-height: 1.95; }
+        body.kindle .block p { text-indent: 1.6em; }
+      }
       .layout.collapsed {
         grid-template-columns: 1fr;
       }
@@ -1344,7 +1497,7 @@
       }
     </style>
   </head>
-  <body class="eye">
+  <body class="kindle">
     <header class="topbar">
       <div class="topbar-inner">
         <div class="brand">
@@ -9992,6 +10145,11 @@
         </div>
       </main>
     </div>
+
+    <script>
+      // Kindle-like (e-ink) visual: enable by default, keep existing toggles functional.
+      // If you want to revert, remove "kindle" from <body class="">.
+    </script>
     <div class="floating">
       <button class="fab" id="btnPanel" type="button" title="阅读设置">设置</button>
       <button class="fab" id="btnQuickToggle" type="button" title="一键切换（Esc）">一键切换</button>
