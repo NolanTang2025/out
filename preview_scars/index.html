@@ -7,7 +7,10 @@
     <meta name="color-scheme" content="light dark" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <!-- pdf.js: v4 npm 包不再附带 legacy UMD（旧 CDN 路径 404）。固定使用 3.x legacy 以保证 window.pdfjsLib -->
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.min.js"></script>
     <script>
@@ -21,43 +24,38 @@
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
     <style>
       :root {
-        /* touchfish — artful, dark-first, neon accents */
-        --font-display: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
-        --font-body: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+        /* touchfish — calm, paper-like, minimal */
+        --font-display: "Noto Serif SC", ui-serif, Georgia, "Times New Roman", Times, serif;
+        --font-body: "Noto Sans SC", ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
         --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-        --bg: #070914;
-        --paper: rgba(12, 15, 34, 0.72);
-        --paper-solid: #0b1020;
-        --fg: rgba(255, 255, 255, 0.92);
-        --muted: rgba(255, 255, 255, 0.70);
-        --subtle: rgba(255, 255, 255, 0.52);
-        --border: rgba(255, 255, 255, 0.12);
-        --border-2: rgba(255, 255, 255, 0.18);
-        --surface: rgba(255, 255, 255, 0.06);
-        --surface-2: rgba(255, 255, 255, 0.10);
-        --link: #7df9ff; /* neon-cyan */
-        --accent: #a78bfa; /* purple */
-        --accent-2: #38bdf8; /* cyan */
-        --accent-3: #fbbf24; /* amber */
-        --sel: rgba(125, 249, 255, 0.18);
+        --bg: #f7f1e8;
+        --paper: rgba(255, 248, 234, 0.9);
+        --paper-solid: #fff8ea;
+        --fg: rgba(35, 29, 22, 0.94);
+        --muted: rgba(35, 29, 22, 0.64);
+        --subtle: rgba(35, 29, 22, 0.46);
+        --border: rgba(35, 29, 22, 0.12);
+        --border-2: rgba(35, 29, 22, 0.16);
+        --surface: rgba(35, 29, 22, 0.04);
+        --surface-2: rgba(35, 29, 22, 0.06);
+        --link: #1f2937;
+        --accent: #c67a2b; /* warm ink */
+        --accent-2: #b45309;
+        --accent-3: #a16207;
+        --sel: rgba(198, 122, 43, 0.14);
 
-        --shadow: 0 20px 64px rgba(0, 0, 0, 0.62);
-        --shadow-sm: 0 10px 28px rgba(0, 0, 0, 0.48);
+        --shadow: 0 18px 52px rgba(35, 29, 22, 0.10);
+        --shadow-sm: 0 10px 26px rgba(35, 29, 22, 0.08);
         --maxw: 860px;
         --radius: 16px;
         --radius-lg: 22px;
-        --focus: rgba(125, 249, 255, 0.28);
+        --focus: rgba(198, 122, 43, 0.22);
         --paper-border: color-mix(in srgb, var(--border) 88%, transparent);
-        --caret: rgba(255, 255, 255, 0.74);
+        --caret: rgba(35, 29, 22, 0.72);
 
-        --mesh:
-          radial-gradient(1200px 520px at 18% -8%, rgba(167, 139, 250, 0.22), transparent 62%),
-          radial-gradient(980px 520px at 82% 0%, rgba(56, 189, 248, 0.18), transparent 60%),
-          radial-gradient(860px 520px at 50% 110%, rgba(251, 191, 36, 0.10), transparent 56%);
-        --grid:
-          linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(255,255,255,0.045) 1px, transparent 1px);
+        --mesh: radial-gradient(1000px 420px at 50% 0%, rgba(198, 122, 43, 0.10), transparent 62%);
+        --grid: none;
       }
       @media (prefers-color-scheme: light) {
         :root {
@@ -264,21 +262,19 @@
       }
       .hero {
         position: relative;
-        border: 1px solid var(--paper-border);
-        background: color-mix(in srgb, var(--paper-solid) 70%, transparent);
-        border-radius: var(--radius-lg);
-        padding: 22px 22px;
-        box-shadow: var(--shadow);
+        border: 0;
+        background: transparent;
+        border-radius: 28px;
+        padding: 92px 18px 70px;
+        box-shadow: none;
         overflow: hidden;
       }
       .hero::before {
         content: "";
         position: absolute;
-        inset: -2px;
-        background: radial-gradient(820px 320px at 18% 0%, rgba(167,139,250,0.32), transparent 60%),
-                    radial-gradient(760px 320px at 82% 10%, rgba(56,189,248,0.24), transparent 60%),
-                    radial-gradient(900px 420px at 50% 110%, rgba(251,191,36,0.10), transparent 60%);
-        opacity: 0.65;
+        inset: 0;
+        background: radial-gradient(880px 360px at 50% 22%, rgba(198, 122, 43, 0.08), transparent 62%);
+        opacity: 1;
         filter: blur(0px);
         pointer-events: none;
       }
@@ -286,37 +282,41 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(to bottom, rgba(255,255,255,0.06), transparent 36%, rgba(255,255,255,0.02));
+        background: linear-gradient(to bottom, rgba(255,255,255,0.30), transparent 48%, rgba(255,255,255,0.0));
         pointer-events: none;
       }
       .hero-head {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 16px;
-        flex-wrap: wrap;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        gap: 14px;
       }
       .hero h1 {
-        margin: 0 0 6px;
+        margin: 0;
         font-family: var(--font-display);
-        font-size: clamp(22px, 2.3vw, 30px);
-        letter-spacing: -0.03em;
-        line-height: 1.12;
-        background: linear-gradient(90deg, color-mix(in srgb, var(--link) 96%, white), color-mix(in srgb, var(--accent) 82%, white));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        font-size: clamp(36px, 5vw, 64px);
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        color: var(--fg);
+        font-weight: 600;
+      }
+      .hero h1 em {
+        font-style: normal;
+        color: var(--accent);
       }
       .hero p {
         margin: 0;
         color: var(--muted);
-        font-size: 14px;
+        font-size: 15px;
+        line-height: 1.75;
       }
       .hero-actions {
         display: flex;
         gap: 10px;
         align-items: center;
         flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 12px;
       }
       .i {
         width: 16px;
@@ -335,10 +335,10 @@
       }
       .primary {
         border: 1px solid transparent;
-        background: color-mix(in srgb, var(--link) 92%, #0000);
+        background: #1f1913;
         color: #fff;
-        border-radius: 12px;
-        padding: 10px 12px;
+        border-radius: 999px;
+        padding: 12px 18px;
         cursor: pointer;
         font: inherit;
         font-size: 13.5px;
@@ -348,14 +348,14 @@
         gap: 8px;
       }
       .primary:hover {
-        filter: brightness(0.98);
+        filter: brightness(1.03);
       }
       .secondary {
         border: 1px solid var(--border);
         background: transparent;
         color: var(--fg);
-        border-radius: 12px;
-        padding: 10px 12px;
+        border-radius: 999px;
+        padding: 12px 16px;
         cursor: pointer;
         font: inherit;
         font-size: 13.5px;
@@ -363,6 +363,13 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
+      }
+      .hero-footnote {
+        margin-top: 22px;
+        text-align: center;
+        color: var(--subtle);
+        font-size: 12px;
+        letter-spacing: 0.02em;
       }
       .secondary:hover {
         background: color-mix(in srgb, var(--paper) 90%, var(--surface));
@@ -1315,7 +1322,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="eye">
     <header class="topbar">
       <div class="topbar-inner">
         <div class="brand">
@@ -1429,30 +1436,21 @@
       <div class="hero">
         <div class="hero-head">
           <div>
-            <h1>touchfish</h1>
-            <p>把 PDF 变成更好读的简体版：自动繁转简、目录、护眼、摸鱼一键切换。</p>
+            <h1>一个 <em>安静</em> 的阅读器。</h1>
+            <p>PDF、网页、长文——一个不打扰你的地方。</p>
           </div>
           <div class="hero-actions">
             <button class="primary" id="btnHeroUpload" type="button">
               <span class="i" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 20h16"/></svg>
               </span>
-              上传 PDF
+              打开阅读器 →
             </button>
-            <button class="secondary" id="btnHeroSample" type="button">
-              <span class="i" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/></svg>
-              </span>
-              打开内置文章
-            </button>
-            <button class="secondary" id="btnHeroStealth" type="button">
-              <span class="i" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-              </span>
-              演示摸鱼
-            </button>
+            <button class="secondary" id="btnHeroSample" type="button">内置文章</button>
+            <button class="secondary" id="btnHeroStealth" type="button">摸鱼模式</button>
           </div>
         </div>
+        <div class="hero-footnote">Made for slow reading</div>
         <div class="value">
           <div class="value-item">
             <div class="value-head">
